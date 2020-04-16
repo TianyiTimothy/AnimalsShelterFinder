@@ -36,4 +36,4 @@ Initializing.
 
 - Bernie who spared no effort to guide the paper work.
 
-  👆Shouted to my professors at Humber College!👆
+  👆Shout out to my professors at Humber College!👆
