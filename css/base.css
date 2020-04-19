@@ -1,13 +1,16 @@
+html,body {
+    height: 100%;
+}
 body {
-    padding-top: 90px
+    padding-top: 90px;
 }
 
 body {
-    padding-top: 0
+    padding-top: 0;
 }
 
 body {
-    margin-left: 232px
+    margin-left: 232px;
 }
 
 .navbar.fixed-left {
@@ -58,4 +61,33 @@ body {
 
 .navbar.fixed-left .navbar-nav .nav-item .dropdown-menu {
     left: 100%
+}
+
+#main #main_top{
+    min-height: 25%;
+    position: relative;
+    padding: 10px;
+    background-color: #E9BD90;
+    text-align: center;
+}
+#main #main_top #slogan{
+    display: block;
+    font-family: 'Indie Flower', cursive;
+}
+#main .main_top__form{
+    display: inline-block;
+    margin: 0 auto;
+}
+
+#main{
+    height: 100%;
+}
+
+#main_map{
+    height: 75%;
+}
+#map {
+    height: 100%;
+    width: 100%;
+    background-color: #666666;
 }

@@ -1,0 +1,2 @@
+<?php
+$GMP_API_KEY = "AIzaSyD9-PQfCU7TlVCXgPzPWfoATXhz-5I1SF0";
