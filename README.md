@@ -24,6 +24,19 @@ Initializing.
 
 
 
+## GitIgnore
+
+Ignored all the keys. 
+
+keys/keys.php
+
+```php
+<?php
+$GMP_API_KEY = "YOUR_KEYS";
+```
+
+
+
 ## Acknowledgments
 
 - [Nithya](<https://github.com/nithyat>) who gave me instruction when I am stuck in PHP.
