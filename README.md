@@ -32,7 +32,9 @@ keys/keys.php
 
 ```php
 <?php
-$GMP_API_KEY = "YOUR_KEYS";
+$GMP_API_KEY = "YOUR_GOOGLEMAP_KEYS";
+$PFD_API_KEY = "YOUR_PETFINDER_KEYS";
+$PFD_SEC = "YOUR_PETFINDER_SECRET";
 ```
 
 

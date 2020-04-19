@@ -1,5 +1,5 @@
-<?php require_once "includes/header.php";?>
-<?php require_once "keys/keys.php";?>
+<?php require_once "includes/header.php"; ?>
+<?php require_once "keys/keys.php"; ?>
 
 
 <section id="main_top">
@@ -12,6 +12,16 @@
 </section>
 
 <section id="main_map">
+    <?php
+    //    get pet data
+    //    https://api.petfinder.com/v2/oauth2/token
+    //    grant_type=client_credentials&client_id={CLIENT-ID}&client_secret={CLIENT-SECRET}
+    require_once "includes/http_functions.php";
+    _httpPost("https://api.petfinder.com/v2/oauth2/token", array(
+        "grant_type" => "client_credentials",
+        "client_id" => "",
+        "client_secret" => $PFD_SEC))
+    ?>
 
 
     <div id="map"></div>
@@ -32,13 +42,4 @@
 </section>
 
 
-
-
-
-
-
-
-
-
-
-<?php require_once "includes/footer.php";?>
+<?php require_once "includes/footer.php"; ?>
