@@ -1,11 +1,14 @@
 <?php
-function _httpGet($url = "")
+function _httpGet($url = "", $headers=array())
 {
 
     $curl = curl_init();
 
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_TIMEOUT, 500);
+
     curl_setopt($curl, CURLOPT_URL, $url);
 
     $res = curl_exec($curl);
