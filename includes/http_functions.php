@@ -1,5 +1,6 @@
 <?php
-function _httpGet($url=""){
+function _httpGet($url = "")
+{
 
     $curl = curl_init();
 
@@ -13,16 +14,30 @@ function _httpGet($url=""){
     return $res;
 }
 
-function _httpPost($url="" ,$requestData=array()){
+function _httpPost($url = "", $requestData = array())
+{
 
     $curl = curl_init();
 
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+//    echo "sending post request to " . $url;
+//    echo "request data: ";
+//    var_dump($requestData);
 
-    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($requestData));
-    $res = curl_exec($curl);
+    curl_setopt($curl, CURLOPT_URL, $url);
+    // set header as data stream output
+    curl_setopt($curl, CURLOPT_HEADER, 1);
+
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    // set method to post
+    curl_setopt($curl, CURLOPT_POST, 1);
+
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $requestData);
+
+    // execute
+    $data = curl_exec($curl);
 
     curl_close($curl);
-    return $res;
+
+//    var_dump($data);
+    return $data;
 }
