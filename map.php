@@ -24,7 +24,6 @@
     //        echo $res;
     //        $token = json_decode($res);
     $token = json_decode(explode("==", $res)[1])->{'access_token'};
-
     // get url
     $getUrl = "https://api.petfinder.com/v2/{CATEGORY}/{ACTION}?{parameter_1}={value_1}&{parameter_2}={value_2}";
     $getUrl = "https://api.petfinder.com/v2/animals?type=dog&page=2";
@@ -33,12 +32,50 @@
     $headers[] = "Authorization: Bearer " . $token;
     // send get request
     $petRes = _httpGet($getUrl, $headers);
-//    echo gettype($petRes); - string
-    $result = json_decode($petRes);
-    echo $result->{'animals'}[0]->{'contact'}->{'address'}->{'address1'};
-    var_dump($result->{'animals'}[10]->{'contact'}->{'address'});
+    //    echo gettype($petRes); - string
+    $animals = json_decode($petRes)->{'animals'};
+    //    echo $animals->{'animals'};
+    //    var_dump($animals[10]);
+    // show needed data
     ?>
 
+    <div class="row">
+    <?php
+    foreach ($animals as $animal) {
+        $type = $animal->{'type'};
+        $address = $animal->{'contact'}->{'address'}->{'address1'} . " " . $animal->{'contact'}->{'address'}->{'address2'};
+        $name = $animal->{'name'};
+        $description = $animal->{'description'};
+
+//        echo strlen($address); - 1
+        // if length != 1, have address
+        $haveAddress = strlen($address) != 1;
+//        if ($haveAddress){echo "yes";}
+        $photos = $animal->{'photos'};
+        if (count($photos) > 0) {
+            $imgSrc = $photos[0]->{'large'};
+        }else{
+            $imgSrc = "img/adopt.png";
+        }
+//        echo "<img src='" . $imgSrc . "' alt='animal image'/>";
+//        echo $address . " --- " . $type . " --- " . $name . "---" . count($photos) . "<br/>";
+
+
+
+        echo '<div class="col-sm-4">';
+        echo '    <div class="card">';
+        echo '        <img class="card-img-top" src="'. $imgSrc.'" alt="Card image cap">';
+        echo '<div class="card-body">';
+        echo '            <h5 class="card-title">'.$name.'</h5>';
+        echo '            <p class="card-text">'.$description.'</p>';
+        echo '            <a href="#" class="btn btn-primary">See location on Map</a>';
+        echo '        </div>';
+        echo    '</div>';
+        echo '</div>';
+    }
+
+    ?>
+    </div>
 
     <!--    <div id="map"></div>-->
     <!--    <script>-->
