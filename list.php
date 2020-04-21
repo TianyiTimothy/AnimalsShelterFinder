@@ -4,10 +4,10 @@
 
 <section id="main_top">
     <span id="slogan" class="display-2">AnimalShelterFinder</span>
-<!--    <form class="main_top__form form-inline my-2 my-lg-0">-->
-<!--        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--        <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>-->
-<!--    </form>-->
+    <!--    <form class="main_top__form form-inline my-2 my-lg-0">-->
+    <!--        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+    <!--        <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>-->
+    <!--    </form>-->
 
 </section>
 
@@ -40,46 +40,45 @@
     ?>
 
     <div class="row">
-    <?php
-    foreach ($animals as $animal) {
-        $type = $animal->{'type'};
-        $address = $animal->{'contact'}->{'address'}->{'address1'} . " " . $animal->{'contact'}->{'address'}->{'address2'};
-        $name = $animal->{'name'};
-        $description = $animal->{'description'};
+        <?php
+        foreach ($animals as $animal) {
+            $type = $animal->{'type'};
+            $address = $animal->{'contact'}->{'address'}->{'address1'} . " " . $animal->{'contact'}->{'address'}->{'address2'};
+            $name = $animal->{'name'};
+            $description = $animal->{'description'};
 
 //        echo strlen($address); - 1
-        // if length != 1, have address
-        $haveAddress = strlen($address) != 1;
+            // if length != 1, have address
+            $haveAddress = strlen($address) != 1;
 //        if ($haveAddress){echo "yes";}
-        $photos = $animal->{'photos'};
-        if (count($photos) > 0) {
-            $imgSrc = $photos[0]->{'large'};
-        }else{
-            $imgSrc = "img/adopt.png";
-        }
+            $photos = $animal->{'photos'};
+            if (count($photos) > 0) {
+                $imgSrc = $photos[0]->{'large'};
+            } else {
+                $imgSrc = "img/adopt.png";
+            }
 //        echo "<img src='" . $imgSrc . "' alt='animal image'/>";
 //        echo $address . " --- " . $type . " --- " . $name . "---" . count($photos) . "<br/>";
 
 
-
-        echo '<div class="col-sm-4">';
-        echo '    <div class="card">';
-        echo '        <img class="card-img-top" src="'. $imgSrc.'" alt="Card image cap">';
-        echo '<div class="card-body">';
-        echo '            <h5 class="card-title">'.$name.'</h5>';
-        echo '            <p class="card-text">'.$description.'</p>';
-        // only if there is an address, the button is clickable
-        if($haveAddress){
-        echo '            <a href="map.php?address="'.$address.' class="btn btn-primary">See location on Map</a>';
-        }else{
-            echo '            <a href="#" class="btn btn-primary disabled">NO ADDRESS</a>';
+            echo '<div class="col-sm-4">';
+            echo '    <div class="card">';
+            echo '        <img class="card-img-top" src="' . $imgSrc . '" alt="Card image cap">';
+            echo '<div class="card-body">';
+            echo '            <h5 class="card-title">' . $name . '</h5>';
+            echo '            <p class="card-text">' . $description . '</p>';
+            // only if there is an address, the button is clickable
+            if ($haveAddress) {
+                echo '            <a href="map.php?address=' . $address . '" class="btn btn-primary">See location on Map</a>';
+            } else {
+                echo '            <a href="#" class="btn btn-primary disabled">NO ADDRESS</a>';
+            }
+            echo '        </div>';
+            echo '</div>';
+            echo '</div>';
         }
-        echo '        </div>';
-        echo    '</div>';
-        echo '</div>';
-    }
 
-    ?>
+        ?>
     </div>
 
     <!--    <div id="map"></div>-->

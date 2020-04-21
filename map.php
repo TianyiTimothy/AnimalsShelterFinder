@@ -13,45 +13,27 @@
 
 <section id="main_map">
     <?php
-    //    get pet data
-    //    https://api.petfinder.com/v2/oauth2/token
-    //    grant_type=client_credentials&client_id={CLIENT-ID}&client_secret={CLIENT-SECRET}
-    require_once "includes/http_functions.php";
-    $res = _httpPost("https://api.petfinder.com/v2/oauth2/token", array(
-        "grant_type" => "client_credentials",
-        "client_id" => $PFD_API_KEY,
-        "client_secret" => $PFD_SEC));
-    //        echo $res;
-    //        $token = json_decode($res);
-    $token = json_decode(explode("==", $res)[1])->{'access_token'};
-    // get url
-    $getUrl = "https://api.petfinder.com/v2/{CATEGORY}/{ACTION}?{parameter_1}={value_1}&{parameter_2}={value_2}";
-    $getUrl = "https://api.petfinder.com/v2/animals?type=dog&page=2";
-    $getUrl = "https://api.petfinder.com/v2/animals";
-    $headers = array();
-    $headers[] = "Authorization: Bearer " . $token;
-    // send get request
-    $petRes = _httpGet($getUrl, $headers);
-    //    echo gettype($petRes); - string
-    $animals = json_decode($petRes)->{'animals'};
-    //    echo $animals->{'animals'};
-    //    var_dump($animals[10]);
-    // show needed data
+    // get parameters
+    if(isset($_GET['address'])){
+//        echo $_GET['address'];
+    }else {
+//        echo "nope";
+    }
     ?>
 
-        <div id="map"></div>
-        <script>
-            var map;
-
-            function initMap() {
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: -34.397, lng: 150.644},
-                    zoom: 8
-                });
-            }
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=<?= $GMP_API_KEY; ?>&callback=initMap"
-                async defer></script>
+<!--        <div id="map"></div>-->
+<!--        <script>-->
+<!--            var map;-->
+<!---->
+<!--            function initMap() {-->
+<!--                map = new google.maps.Map(document.getElementById('map'), {-->
+<!--                    center: {lat: -34.397, lng: 150.644},-->
+<!--                    zoom: 8-->
+<!--                });-->
+<!--            }-->
+<!--        </script>-->
+<!--        <script src="https://maps.googleapis.com/maps/api/js?key=--><?//= $GMP_API_KEY; ?><!--&callback=initMap"-->
+<!--                async defer></script>-->
 
 
 </section>
