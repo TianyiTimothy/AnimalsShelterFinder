@@ -32,6 +32,9 @@
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="list.php">Animal Shelter Finder</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="map.php">Map</a>
                 </li>
 <!--                <li class="nav-item dropdown">-->
