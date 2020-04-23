@@ -1,6 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+session_start();
+require_once "keys/keys.php";
+require_once "GoogleAPI/vendor/autoload.php";
+
+// google client object
+$googleClient = new Google_Client();
+$googleClient->setClientId($GSI_CLIENT_ID);
+$googleClient->setClientSecret($GSI_CLIENT_SECRET);
+$googleClient->setRedirectUri("https://localhost/xmlfinal/list.php");
+$googleClient->addScope('email');
+$googleClient->addScope('profile');
+
+// signing in? store token into session
+if (isset($_GET['code'])) {
+
+    $token = $googleClient->fetchAccessTokenWithAuthCode($_GET['code']);
+
+    if (!isset($token['error'])) {
+        $googleClient->setAccessToken($token['access_token']);
+        $_SESSION['access_token'] = $token['access_token'];
+
+        $google_service = new Google_Service_Oauth2($googleClient);
+
+        $data = $google_service->userinfo->get();
+
+        if (!empty($data['given_name'])) {
+            $_SESSION['user_first_name'] = $data['given_name'];
+        }
+        if (!empty($data['family_name'])) {
+            $_SESSION['user_last_name'] = $data['family_name'];
+        }
+        if (!empty($data['email'])) {
+            $_SESSION['user_email'] = $data['email'];
+        }
+
+        // redirect to list
+        header("Location: list.php");
+    } else {
+        echo "error occurs when doing Google login.";
+    }
+}
+//echo $_SERVER['REQUEST_URI'];
+// if not sign in: redirect
+if (!isset($_SESSION['access_token']) && !explode("login.php", $_SERVER['REQUEST_URI'])) {
+    header("Location: login.php");
+}else if(isset($_SESSION['access_token'])){
+?>
 <head>
     <title>Animals Shelter Finder</title>
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
@@ -37,21 +85,28 @@
                 <li class="nav-item">
                     <a class="nav-link" href="map.php">Map</a>
                 </li>
-<!--                <li class="nav-item dropdown">-->
-<!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"-->
-<!--                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                        Dropdown-->
-<!--                    </a>-->
-<!--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-<!--                        <a class="dropdown-item" href="#">Action</a>-->
-<!--                        <a class="dropdown-item" href="#">Another action</a>-->
-<!--                        <div class="dropdown-divider"></div>-->
-<!--                        <a class="dropdown-item" href="#">Something else here</a>-->
-<!--                    </div>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link disabled" href="#">Disabled</a>-->
-<!--                </li>-->
+                <!--                <li class="nav-item dropdown">-->
+                <!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"-->
+                <!--                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                <!--                        Dropdown-->
+                <!--                    </a>-->
+                <!--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+                <!--                        <a class="dropdown-item" href="#">Action</a>-->
+                <!--                        <a class="dropdown-item" href="#">Another action</a>-->
+                <!--                        <div class="dropdown-divider"></div>-->
+                <!--                        <a class="dropdown-item" href="#">Something else here</a>-->
+                <!--                    </div>-->
+                <!--                </li>-->
+                <!--                <li class="nav-item">-->
+                <!--                    <a class="nav-link disabled" href="#">Disabled</a>-->
+                <!--                </li>-->
+                <?php
+                echo "welcome, " . $_SESSION["user_first_name"];
+                echo "<form action='login.php' method='post'>";
+                echo "<input type='submit' name='signout' value='sign out' />";
+                echo "</form>";
+                }
+                ?>
             </ul>
         </div>
     </nav>

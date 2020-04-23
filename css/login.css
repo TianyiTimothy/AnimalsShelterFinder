@@ -1,0 +1,9 @@
+#body{
+    background-color: #00bfbf;
+    position: relative;
+}
+#body .card{
+    position: absolute;
+    top: calc(50% - 200px);
+    left: calc(50% - 150px);
+}
