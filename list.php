@@ -46,6 +46,7 @@
             $address = $animal->{'contact'}->{'address'}->{'address1'} . " " . $animal->{'contact'}->{'address'}->{'address2'};
             $name = $animal->{'name'};
             $description = $animal->{'description'};
+            $id = $animal->{'id'};
 
 //        echo strlen($address); - 1
             // if length != 1, have address
@@ -63,7 +64,9 @@
 
             echo '<div class="col-sm-4">';
             echo '    <div class="card">';
+            echo '<a href="detail.php?id=' . $id . '">';
             echo '        <img class="card-img-top" src="' . $imgSrc . '" alt="Card image cap">';
+            echo '</a>';
             echo '<div class="card-body">';
             echo '            <h5 class="card-title">' . $name . '</h5>';
             echo '            <p class="card-text">' . $description . '</p>';
@@ -73,6 +76,7 @@
             } else {
                 echo '            <a href="#" class="btn btn-primary disabled">NO ADDRESS</a>';
             }
+            echo '<a href="detail.php?id=' . $id . '" class="btn btn-primary ml-2">Detail</a>';
             echo '        </div>';
             echo '</div>';
             echo '</div>';

@@ -92,3 +92,8 @@ body {
     width: 100%;
     background-color: #666666;
 }
+.card-img-top{
+    height: 300px;
+    object-fit: cover;
+    background-position: center center;
+}

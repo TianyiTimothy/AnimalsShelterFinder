@@ -68,7 +68,11 @@ if (!isset($_SESSION['access_token']) && !explode("login.php", $_SERVER['REQUEST
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-left">
-        <a class="navbar-brand" href="#">Navbar</a>
+
+        <?php
+        echo "<h4>welcome, " . $_SESSION["user_first_name"] . "</h4>";
+        ?>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -76,14 +80,14 @@ if (!isset($_SESSION['access_token']) && !explode("login.php", $_SERVER['REQUEST
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+<!--                <li class="nav-item">-->
+<!--                    <a class="btn btn-outline-dark mb-1 nav-link" href="index.php">Home</a>-->
+<!--                </li>-->
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php">Home</a>
+                    <a class="btn btn-outline-dark mb-1 nav-link" href="list.php">Animal Shelter Finder</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="list.php">Animal Shelter Finder</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="map.php">Map</a>
+                    <a class="btn btn-outline-dark mb-1 nav-link" href="map.php">Map</a>
                 </li>
                 <!--                <li class="nav-item dropdown">-->
                 <!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"-->
@@ -101,11 +105,11 @@ if (!isset($_SESSION['access_token']) && !explode("login.php", $_SERVER['REQUEST
                 <!--                    <a class="nav-link disabled" href="#">Disabled</a>-->
                 <!--                </li>-->
                 <?php
-                echo "welcome, " . $_SESSION["user_first_name"];
                 echo "<form action='login.php' method='post'>";
-                echo "<input type='submit' name='signout' value='sign out' />";
+                echo "<input class='btn btn-outline-dark mb-1 nav-link' style='display: inline-block;width: 100%;' type='submit' name='signout' value='sign out' />";
                 echo "</form>";
                 }
+
                 ?>
             </ul>
         </div>
