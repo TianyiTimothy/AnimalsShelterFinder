@@ -3,6 +3,13 @@ $url = "https://api.petfinder.com/v2/animals/";
 $id=0;
 if(isset($_GET['id'])){
     $id = $_GET['id'];
+    $getUrl = $url . $id;
+    $headers = array();
+    $headers[] = "Authorization: Bearer " . $token;
+    // send get request
+    $petRes = _httpGet($getUrl, $headers);
+    //    echo gettype($petRes); - string
+    $animals = json_decode($petRes)->{'animals'};
 }
 ?>
 

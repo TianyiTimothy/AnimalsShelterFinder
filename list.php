@@ -1,5 +1,4 @@
 <?php require_once "includes/header.php"; ?>
-<?php require_once "keys/keys.php"; ?>
 
 
 <section id="main_top">
@@ -13,20 +12,12 @@
 
 <section id="main_map">
     <?php
-    //    get pet data
-    //    https://api.petfinder.com/v2/oauth2/token
-    //    grant_type=client_credentials&client_id={CLIENT-ID}&client_secret={CLIENT-SECRET}
+    //    get token
     require_once "includes/http_functions.php";
-    $res = _httpPost("https://api.petfinder.com/v2/oauth2/token", array(
-        "grant_type" => "client_credentials",
-        "client_id" => $PFD_API_KEY,
-        "client_secret" => $PFD_SEC));
-    //        echo $res;
-    //        $token = json_decode($res);
-    $token = json_decode(explode("==", $res)[1])->{'access_token'};
-    // get url
-    $getUrl = "https://api.petfinder.com/v2/{CATEGORY}/{ACTION}?{parameter_1}={value_1}&{parameter_2}={value_2}";
-    $getUrl = "https://api.petfinder.com/v2/animals?type=dog&page=2";
+    require_once "includes/functions.php";
+    $token = getPetFinderToken($PFD_API_KEY,$PFD_SEC);
+//    $getUrl = "https://api.petfinder.com/v2/{CATEGORY}/{ACTION}?{parameter_1}={value_1}&{parameter_2}={value_2}";
+//    $getUrl = "https://api.petfinder.com/v2/animals?type=dog&page=2";
     $getUrl = "https://api.petfinder.com/v2/animals";
     $headers = array();
     $headers[] = "Authorization: Bearer " . $token;
