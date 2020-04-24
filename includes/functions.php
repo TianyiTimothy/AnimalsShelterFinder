@@ -1,6 +1,7 @@
 <?php
 
 function getPetFinderToken($PFD_API_KEY,$PFD_SEC){
+    include "http_functions.php";
 
     // todo: singleton
     $res = _httpPost("https://api.petfinder.com/v2/oauth2/token", array(

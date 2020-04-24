@@ -1,15 +1,25 @@
 <?php
+require_once "keys/keys.php";
+require_once "includes/functions.php";
+
 $url = "https://api.petfinder.com/v2/animals/";
 $id=0;
 if(isset($_GET['id'])){
     $id = $_GET['id'];
     $getUrl = $url . $id;
+
+    // get token
+    $token = getPetFinderToken($PFD_API_KEY,$PFD_SEC);
+
+    // set token into header
     $headers = array();
     $headers[] = "Authorization: Bearer " . $token;
+
     // send get request
     $petRes = _httpGet($getUrl, $headers);
-    //    echo gettype($petRes); - string
-    $animals = json_decode($petRes)->{'animals'};
+
+    // get results
+//    $animal = json_decode($petRes)->{'animals'};
 }
 ?>
 
@@ -46,7 +56,8 @@ if(isset($_GET['id'])){
 
     <section id="main_map">
 
-<?= $id ?>
+<?php     var_dump($petRes);
+?>
 
 
     </section>
