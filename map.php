@@ -1,5 +1,10 @@
 <?php require_once "includes/header.php"; ?>
-<?php require_once "keys/keys.php"; ?>
+<?php require_once "keys/keys.php";
+
+if (!isset($_SESSION['access_token'])) {
+    header("Location: login.php");
+}
+?>
 
 
 <section id="main_top">
