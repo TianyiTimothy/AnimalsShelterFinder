@@ -29,6 +29,14 @@ $gender = $animal->{'gender'};
 $size = $animal->{'size'};
 $coat = $animal->{'coat'} ?: "Unknown";
 $email = $animal->{'contact'}->{'email'};
+$address = $animal->{'contact'}->{'address'}->{'address1'} . " " .
+$animal->{'contact'}->{'address'}->{'address2'} === " " ? "Unknown" : $animal;
+$city = $animal->{'contact'}->{'address'}->{'city'} . ", " . $animal->{'contact'}->{'address'}->{'state'} . ", " .
+    $animal->{'contact'}->{'address'}->{'country'};
+$postcode = $animal->{'contact'}->{'address'}->{'postcode'};
+$phone = $animal->{'contact'}->{'phone'} ?: "Unknown";
+$status = $animal->{'status'};
+$updated = $animal->{'status_changed_at'};
 
 $photos = $animal->{'photos'};
 //    var_dump($photos);
@@ -75,12 +83,12 @@ $photos = $animal->{'photos'};
                 <?php
 
                 if (count($photos) > 0) {
-                    foreach ($photos as $key=>$photo) {
+                    foreach ($photos as $key => $photo) {
                         $image = $photo->{'large'};
 //                        echo $image;
                         // todo try another way of ternary operation
-                        $class = $key==0?"carousel-item active":"carousel-item";
-                        echo '<div class="'.$class.'">';
+                        $class = $key == 0 ? "carousel-item active" : "carousel-item";
+                        echo '<div class="' . $class . '">';
                         echo '<img class="d-block w-100" src="' . $image . '" alt="picture of ' . $name . '" />';
                         echo '</div>';
                     }
@@ -105,30 +113,65 @@ $photos = $animal->{'photos'};
         </div>
         <div class="card">
             <?php
-//            var_dump($petRes);
-            echo '<dl class="row">';
-            echo '<dt class="col-sm-2">Age</dt>';
-            echo '<dd class="col-sm-4">' . $age . '</dd>';
-            echo '<dt class="col-sm-2">Gender</dt>';
-            echo '<dd class="col-sm-4">' . $gender . '</dd>';
-            echo '<dt class="col-sm-2">Size</dt>';
-            echo '<dd class="col-sm-4">' . $size . '</dd>';
-            echo '<dt class="col-sm-2">Coat</dt>';
-            echo '<dd class="col-sm-4">' . $coat . '</dd>';
-            echo '</dl>';
-
-            //            echo '<ul class="list-inline font-weight-bold">';
-            //            echo '<li class="list-inline-item">'.$age.'</li>';
-            //            echo '| ';
-            //            echo '<li class="list-inline-item">'.$gender.'</li>';
-            //            echo '| ';
-            //            echo '<li class="list-inline-item">'.$size.'</li>';
-            //            echo '| ';
-            //            echo '<li class="list-inline-item">'.$coat.'</li>' . ' Hair';
-            //            echo '</ul>';
-            }
-
+            // if starts with "a", use "an" instead of "a" to match funny English grammar
+            $grammarStatus = strpos($status, 'a') === 0 ? 'an ' : 'a ';
+            echo '<h1>' . $name . ' is ' . $grammarStatus . $status . ' ' . $type . '</h1>';
             ?>
+            <div class="card">
+                <div class="card-header">About</div>
+                <div class="card-body">
+                    <?php
+                    //            var_dump($petRes);
+                    echo '<dl class="row">';
+                    echo '<dt class="col-sm-2">Age</dt>';
+                    echo '<dd class="col-sm-4">' . $age . '</dd>';
+                    echo '<dt class="col-sm-2">Gender</dt>';
+                    echo '<dd class="col-sm-4">' . $gender . '</dd>';
+                    echo '<dt class="col-sm-2">Size</dt>';
+                    echo '<dd class="col-sm-4">' . $size . '</dd>';
+                    echo '<dt class="col-sm-2">Coat</dt>';
+                    echo '<dd class="col-sm-4">' . $coat . '</dd>';
+                    echo '</dl>';
+
+
+                    //            echo '<ul class="list-inline font-weight-bold">';
+                    //            echo '<li class="list-inline-item">'.$age.'</li>';
+                    //            echo '| ';
+                    //            echo '<li class="list-inline-item">'.$gender.'</li>';
+                    //            echo '| ';
+                    //            echo '<li class="list-inline-item">'.$size.'</li>';
+                    //            echo '| ';
+                    //            echo '<li class="list-inline-item">'.$coat.'</li>' . ' Hair';
+                    //            echo '</ul>';
+                    }
+
+                    ?>
+                </div>
+            </div>
+            <div class="card"> <!--style="width: 20rem"-->
+                <div class="card-header">Contact</div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Address:</dt>
+                        <dd class="col-sm-8"><?= $address; ?></dd>
+                        <dt class="col-sm-4">City:</dt>
+                        <dd class="col-sm-8"><?= $city; ?></dd>
+                        <dt class="col-sm-4">Postcode:</dt>
+                        <dd class="col-sm-8"><?= $postcode; ?></dd>
+                        <dt class="col-sm-4">Email:</dt>
+                        <dd class="col-sm-8"><?= $email; ?></dd>
+                        <dt class="col-sm-4">Phone:</dt>
+                        <dd class="col-sm-8"><?= $phone; ?></dd>
+                    </dl>
+
+                </div>
+                <div class="card-footer text-muted">
+                    <dl class="row">
+                        <dt class="col-sm-4">Updated:</dt>
+                        <dd class="col-sm-8"><?= date('Y-m-d', strtotime($updated)); ?></dd>
+                    </dl>
+                </div>
+            </div>
         </div>
 
     </section>

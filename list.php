@@ -1,4 +1,9 @@
-<?php require_once "includes/header.php"; ?>
+<?php require_once "includes/header.php";
+
+if (!isset($_SESSION['access_token'])) {
+    header("Location: login.php");
+}
+?>
 
 
 <section id="main_top">
