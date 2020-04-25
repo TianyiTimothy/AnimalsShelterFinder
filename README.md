@@ -28,19 +28,25 @@ done------------------
 
 **Login.php**: You need to login first, to track those who wastes my API usages.😄😄😄😄
 
-![image-20200425002222348](C:\Users\41604\AppData\Roaming\Typora\typora-user-images\image-20200425002222348.png)
+![image-20200425002222348](img/readme/login1.png)
+
+It is google login
+
+![image-20200425002943935](img/readme/login2.png)
 
 **List.php**: Showing all the animals return from the PetFinder API.
 
-![image-20200425000509071](C:\Users\41604\AppData\Roaming\Typora\typora-user-images\image-20200425000509071.png)
+![image-20200425000509071](img/readme/list.png)
 
 Detail.php: Showing details of one pet. The picture is deployed in a carousel rendering.
 
-![image-20200425000447830](C:\Users\41604\AppData\Roaming\Typora\typora-user-images\image-20200425000447830.png)
+![image-20200425000447830](img/readme/detail.png)
 
 map.php: Showing shelters on Google Map. (其实还没整明白咋用 哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈)
 
-![image-20200425002356181](C:\Users\41604\AppData\Roaming\Typora\typora-user-images\image-20200425002356181.png)
+(If you goes to map.php by clicking "see location on map" on list.php, map.php will show the shelter of that specific animal.)
+
+![image-20200425002356181](img/readme/map.png)
 
 不知道这些图片能不能正常上传到github上啊 试试看
 
