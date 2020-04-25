@@ -97,3 +97,7 @@ body {
     object-fit: cover;
     background-position: center center;
 }
+#animalImages{
+    width: 500px;
+    float: left;
+}

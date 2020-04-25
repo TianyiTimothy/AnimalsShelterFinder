@@ -4,30 +4,37 @@ require_once "includes/functions.php";
 
 $url = "https://api.petfinder.com/v2/animals/";
 $id = 0;
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $getUrl = $url . $id;
+if (!isset($_GET['id'])) {
+    header("Location: list.php");
+}else{
 
-    // get token
-    $token = getPetFinderToken($PFD_API_KEY, $PFD_SEC);
+$id = $_GET['id'];
+$getUrl = $url . $id;
 
-    // set token into header
-    $headers = array();
-    $headers[] = "Authorization: Bearer " . $token;
+// get token
+$token = getPetFinderToken($PFD_API_KEY, $PFD_SEC);
 
-    // send get request
-    $petRes = _httpGet($getUrl, $headers);
-    $animal = json_decode($petRes)->{'animal'};
-    $type = $animal->{'type'};
-    $age = $animal->{'age'};
-    $gender = $animal->{'gender'};
-    $size = $animal->{'size'};
-    $coat = $animal->{'coat'};
-    $email = $animal->{'contact'}->{'email'};
+// set token into header
+$headers = array();
+$headers[] = "Authorization: Bearer " . $token;
 
-    // get results
+// send get request
+$petRes = _httpGet($getUrl, $headers);
+
+$animal = json_decode($petRes)->{'animal'};
+$name = $animal->{'name'};
+$type = $animal->{'type'};
+$age = $animal->{'age'};
+$gender = $animal->{'gender'};
+$size = $animal->{'size'};
+$coat = $animal->{'coat'} ?: "Unknown";
+$email = $animal->{'contact'}->{'email'};
+
+$photos = $animal->{'photos'};
+//    var_dump($photos);
+
+// get results
 //    $animal = json_decode($petRes)->{'animals'};
-}
 ?>
 
 <!DOCTYPE html>
@@ -58,33 +65,69 @@ if (isset($_GET['id'])) {
         <!--            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
         <!--            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>-->
         <!--        </form>-->
+        <a href="list.php" class="btn btn-dark">Back</a>
 
     </section>
 
     <section id="main_info">
+        <div id="animalImages" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <?php
+
+                if (count($photos) > 0) {
+                    foreach ($photos as $key=>$photo) {
+                        $image = $photo->{'large'};
+//                        echo $image;
+                        // todo try another way of ternary operation
+                        $class = $key==0?"carousel-item active":"carousel-item";
+                        echo '<div class="'.$class.'">';
+                        echo '<img class="d-block w-100" src="' . $image . '" alt="picture of ' . $name . '" />';
+                        echo '</div>';
+                    }
+                } else {
+                    // no image from api, use default instead
+                    $image = "img/adopt.png";
+                    echo '<div class="carousel-item active">';
+                    echo '<img class="d-block w-100" src="' . $image . '" alt="picture of ' . $name . '"';
+                    echo '</div>';
+                }
+
+                ?>
+            </div>
+            <a class="carousel-control-prev" href="#animalImages" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#animalImages" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
         <div class="card">
             <?php
-//                        var_dump($petRes);
+//            var_dump($petRes);
             echo '<dl class="row">';
             echo '<dt class="col-sm-2">Age</dt>';
-            echo '<dd class="col-sm-10">' . $age . '</dd>';
+            echo '<dd class="col-sm-4">' . $age . '</dd>';
             echo '<dt class="col-sm-2">Gender</dt>';
-            echo '<dd class="col-sm-10">' . $gender . '</dd>';
+            echo '<dd class="col-sm-4">' . $gender . '</dd>';
             echo '<dt class="col-sm-2">Size</dt>';
-            echo '<dd class="col-sm-10">' . $size . '</dd>';
+            echo '<dd class="col-sm-4">' . $size . '</dd>';
             echo '<dt class="col-sm-2">Coat</dt>';
-            echo '<dd class="col-sm-10">' . $coat . '</dd>';
+            echo '<dd class="col-sm-4">' . $coat . '</dd>';
             echo '</dl>';
 
-//            echo '<ul class="list-inline font-weight-bold">';
-//            echo '<li class="list-inline-item">'.$age.'</li>';
-//            echo '| ';
-//            echo '<li class="list-inline-item">'.$gender.'</li>';
-//            echo '| ';
-//            echo '<li class="list-inline-item">'.$size.'</li>';
-//            echo '| ';
-//            echo '<li class="list-inline-item">'.$coat.'</li>' . ' Hair';
-//            echo '</ul>';
+            //            echo '<ul class="list-inline font-weight-bold">';
+            //            echo '<li class="list-inline-item">'.$age.'</li>';
+            //            echo '| ';
+            //            echo '<li class="list-inline-item">'.$gender.'</li>';
+            //            echo '| ';
+            //            echo '<li class="list-inline-item">'.$size.'</li>';
+            //            echo '| ';
+            //            echo '<li class="list-inline-item">'.$coat.'</li>' . ' Hair';
+            //            echo '</ul>';
+            }
+
             ?>
         </div>
 
