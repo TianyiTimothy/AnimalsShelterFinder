@@ -20,9 +20,29 @@ Get pets' location from [Pet Finder API](https://www.petfinder.com/developers/) 
 
 ## Project Status
 
-Initializing.
+Initializing-----------
 
+done------------------
 
+来康康图片效果吧！or you can request for your own API keys(there are links above) to deploy this project.
+
+**Login.php**: You need to login first, to track those who wastes my API usages.😄😄😄😄
+
+![image-20200425002222348](C:\Users\41604\AppData\Roaming\Typora\typora-user-images\image-20200425002222348.png)
+
+**List.php**: Showing all the animals return from the PetFinder API.
+
+![image-20200425000509071](C:\Users\41604\AppData\Roaming\Typora\typora-user-images\image-20200425000509071.png)
+
+Detail.php: Showing details of one pet. The picture is deployed in a carousel rendering.
+
+![image-20200425000447830](C:\Users\41604\AppData\Roaming\Typora\typora-user-images\image-20200425000447830.png)
+
+map.php: Showing shelters on Google Map. (其实还没整明白咋用 哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈)
+
+![image-20200425002356181](C:\Users\41604\AppData\Roaming\Typora\typora-user-images\image-20200425002356181.png)
+
+不知道这些图片能不能正常上传到github上啊 试试看
 
 ## GitIgnore
 
