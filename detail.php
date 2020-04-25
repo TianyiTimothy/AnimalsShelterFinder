@@ -29,8 +29,8 @@ $gender = $animal->{'gender'};
 $size = $animal->{'size'};
 $coat = $animal->{'coat'} ?: "Unknown";
 $email = $animal->{'contact'}->{'email'};
-$address = $animal->{'contact'}->{'address'}->{'address1'} . " " .
-$animal->{'contact'}->{'address'}->{'address2'} === " " ? "Unknown" : $animal;
+$address = $animal->{'contact'}->{'address'}->{'address1'} . " " . $animal->{'contact'}->{'address'}->{'address2'};
+$address = $address === " " ? "Unknown" : $address;
 $city = $animal->{'contact'}->{'address'}->{'city'} . ", " . $animal->{'contact'}->{'address'}->{'state'} . ", " .
     $animal->{'contact'}->{'address'}->{'country'};
 $postcode = $animal->{'contact'}->{'address'}->{'postcode'};
@@ -96,7 +96,7 @@ $photos = $animal->{'photos'};
                     // no image from api, use default instead
                     $image = "img/adopt.png";
                     echo '<div class="carousel-item active">';
-                    echo '<img class="d-block w-100" src="' . $image . '" alt="picture of ' . $name . '"';
+                    echo '<img class="d-block w-100" src="' . $image . '" alt="picture of ' . $name . '">';
                     echo '</div>';
                 }
 
