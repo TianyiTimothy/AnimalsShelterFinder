@@ -19,14 +19,14 @@
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -34.397, lng: 150.644},
-                zoom: 8
+                center: {lat: 43.6532, lng: -79.3832},
+                zoom: 16
             });
         }
     </script>
-    <!--    <script src="https://maps.googleapis.com/maps/api/js?key=-->
-    <? //= $GMP_API_KEY; ?><!--<!--&callback=initMap"-->
-    <!--            async defer></script>-->
+        <script src="https://maps.googleapis.com/maps/api/js?key=
+<?= $GMP_API_KEY; ?>&callback=initMap"
+                async defer></script>
 
     <?php
     //    https://maps.googleapis.com/maps/api/place/findplacefromtext/json?
@@ -46,9 +46,9 @@
 //            "&inputtype=textquery&" .
 //            "fields=photos,formatted_address,name,rating,opening_hours,geometry&" .
             "key=" . $GMP_API_KEY);
-//        var_dump($res);
+        var_dump($res);
         ?>
-        <script src="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=<?= $GMP_API_KEY; ?>&input=<?= $_GET['address']; ?>" async defer></script>
+<!--        <script src="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=--><?//= $GMP_API_KEY; ?><!--&input=--><?//= $_GET['address']; ?><!--" async defer></script>-->
 
         <?php
 
