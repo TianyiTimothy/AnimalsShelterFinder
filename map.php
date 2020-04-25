@@ -46,7 +46,7 @@
 //            "&inputtype=textquery&" .
 //            "fields=photos,formatted_address,name,rating,opening_hours,geometry&" .
             "key=" . $GMP_API_KEY);
-        var_dump($res);
+//        var_dump($res);
         ?>
 <!--        <script src="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=--><?//= $GMP_API_KEY; ?><!--&input=--><?//= $_GET['address']; ?><!--" async defer></script>-->
 
