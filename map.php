@@ -17,12 +17,7 @@ if (!isset($_SESSION['access_token'])) {
 </section>
 
 <section id="main_map">
-
-
     <?php
-
-    $address = "Toronto";
-
     if (isset($_GET['address'])) {
 //        echo $_GET['address'];
         // keys
@@ -74,6 +69,5 @@ if (!isset($_SESSION['access_token'])) {
             async defer></script>
 
 </section>
-
 
 <?php require_once "includes/footer.php"; ?>
