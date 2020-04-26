@@ -18,49 +18,60 @@ if (!isset($_SESSION['access_token'])) {
 
 <section id="main_map">
 
-    <div id="map"></div>
-    <script>
-        var map;
-
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 43.6532, lng: -79.3832},
-                zoom: 16
-            });
-        }
-    </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=
-<?= $GMP_API_KEY; ?>&callback=initMap"
-                async defer></script>
 
     <?php
-    //    https://maps.googleapis.com/maps/api/place/findplacefromtext/json?
-    //input=Museum%20of%20Contemporary%20Art%20Australia&
-    //inputtype=textquery&
-    //fields=photos,formatted_address,name,rating,opening_hours,geometry&
-    //key=YOUR_API_KEY
-    // get parameters
+
+    $address = "Toronto";
+
     if (isset($_GET['address'])) {
 //        echo $_GET['address'];
         // keys
         require_once "keys/keys.php";
         // send get request
         require_once "includes/http_functions.php";
-        $res = _httpGet("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?" .
-            "input=" . $_GET['address'] .
-//            "&inputtype=textquery&" .
-//            "fields=photos,formatted_address,name,rating,opening_hours,geometry&" .
-            "key=" . $GMP_API_KEY);
-//        var_dump($res);
-        ?>
-<!--        <script src="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=--><?//= $GMP_API_KEY; ?><!--&input=--><?//= $_GET['address']; ?><!--" async defer></script>-->
 
-        <?php
+        $address = $_GET['address'];
 
     } else {
-//        echo "nope";
+        // todo show all shelters near user
     }
     ?>
+
+    <div id="map"></div>
+    <script>
+        var map;
+        var geocoder;
+        var marker;
+        var pos;
+
+        function initMap() {
+            // use address to get lat & lng from geocoder
+            var address = "<?= $address; ?>";
+            geocoder = new google.maps.Geocoder();
+            geocoder.geocode({'address': address}, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    // alert(results[0].geometry.location);
+                    //alert("<?//= $address; ?>//");
+                    pos = results[0].geometry.location;
+
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 12,
+                        center: pos
+                    });
+
+                    marker = new google.maps.Marker({
+                        position: pos,
+                        map: map,
+                        // bouncing marker
+                        animation: google.maps.Animation.BOUNCE
+                    });
+                }
+            });
+
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?= $GMP_API_KEY; ?>&callback=initMap"
+            async defer></script>
 
 </section>
 
