@@ -10,7 +10,7 @@ require_once "GoogleAPI/vendor/autoload.php";
 $googleClient = new Google_Client();
 $googleClient->setClientId($GSI_CLIENT_ID);
 $googleClient->setClientSecret($GSI_CLIENT_SECRET);
-$googleClient->setRedirectUri("https://localhost/xmlfinal/list.php");
+$googleClient->setRedirectUri("list.php");
 $googleClient->addScope('email');
 $googleClient->addScope('profile');
 
